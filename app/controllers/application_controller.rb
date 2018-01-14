@@ -10,4 +10,19 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
+
+  def read(result)
+    code = result['itemCode']
+    name = result['itemName']
+    url = result['itemUrl']
+    #  gsub は文字列置換用のメソッドで、第一引数を見つけ出して、第二引数に置換するメソッド
+    image_url = result['mediumImageUrls'].first['imageUrl'].gsub('?_ex=128x128', '')
+
+    return {
+      code: code,
+      name: name,
+      url: url,
+      image_url: image_url,
+    }
+  end
 end
